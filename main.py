@@ -1,5 +1,4 @@
 #!/usr/bin/env python
-# -*- coding:  -*-
 from flask import Flask
 from flask_restful import Resource, Api
 from sympy import mpmath
@@ -11,9 +10,9 @@ api = Api(app)
 class GetPi(Resource):
     def get(self, dp):
         mpmath.mp.dps = dp or 1000
-        return {'pi': mpmath.mp.pi}
+        return {'pi': str(mpmath.mp.pi)}
 
-api.add_resource(GetPi, '/<string:dp>')
+api.add_resource(GetPi, '/<int:dp>')
 
 if __name__ == '__main__':
     app.run()
